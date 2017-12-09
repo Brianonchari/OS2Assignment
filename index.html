@@ -1,155 +1,73 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-<!--
-New Event
-http://www.templatemo.com/tm-486-new-event
--->
-<title>ICS 2208 - Operating Systems II Takeaway CAT</title>
-<meta name="description" content="">
-<meta name="author" content="">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-
-<link rel="styesheet" href="css/style"/>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/animate.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/owl.theme.css">
-<link rel="stylesheet" href="css/owl.carousel.css">
-
-<!-- Main css -->
-<link rel="stylesheet" href="css/style.css">
-
-<!-- Google Font -->
-<link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
-
+<style>
+*{
+  margin: 0;
+  padding: 0
+}
+body{
+  background-color: #ABC
+}
+p {
+  text-align: center;
+  font-size: 20px;
+  padding: 20px 20px;
+  background-color: grey;
+  font-family: cursive;
+  border: 2PX solid blue;
+}
+</style>
 </head>
-<body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
+<body>
 
-<!-- =========================
-     PRE LOADER       
-============================== -->
-<div class="preloader">
-
-	<div class="sk-rotating-plane"></div>
-
-</div>
+<p id="clockdiv"></p>
 
 
-<!-- =========================
-     NAVIGATION LINKS     
-============================== -->
-<div class="navbar navbar-fixed-top custom-navbar" role="navigation">
-	<div class="container">
+<script>
+var deadline = '12/11/2017 11:00:00';
+//calculate time remaining
+function getTimeRemaining(deadline){
+  var t = Date.parse(deadline)-Date.parse(new Date());
+  var seconds = Math.floor((t/1000) % 60);
+  var minutes = Math.floor((t/1000/60) % 60);
+  var hours = Math.floor(t/(1000*60*60) %24);
+  days = Math.floor(t/(1000*60*60*24));
+  return{
+    'total':t,'days':days,'hours':hours,'minutes':minutes,'seconds':seconds
+  };
+}
+//initialize the clock
+function initializeClock(id,deadline){
+  var clock= document.getElementById(id);
+  var timeinterval = setInterval(function(){
+    var t = getTimeRemaining(deadline);
+    clock.innerHTML = 'days:' + t.days +
+                      'hours:' + t.hours +
+                      'minutes:' + t.minutes + '' +
+                      'seconds:' + t.seconds ;
+                      if(t.total<=0){
+                        clearInterval(timeinterval);
+                      }
+  },1000);
+  function updateClock(){
+    var t = getTimeRemaining(deadline);
+    clock.innerHTML='days: '+ t.days +'<br>'+
+                    'hours: '+ t.hours +'<br>' +
+                    'minutes:' + t.minutes +'<br>'+
+                    'seconds: ' + t.seconds;
+                    if(t.total<=0){
+                      clearInterval(timeinterval);
+                    }
+  }
+  updateClock();
+  var timeinterval = setInterval(updateClock,1000);
 
-		<!-- navbar header -->
-		<div class="navbar-header">
-			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon icon-bar"></span>
-				<span class="icon icon-bar"></span>
-				<span class="icon icon-bar"></span>
-			</button>
-			<a href="#" class="navbar-brand">ICS 2208</a>
-		</div>
+}
+initializeClock('clockdiv',deadline);//initialize the clock on the browser
 
-		<div class="collapse navbar-collapse">
+</script>
 
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#intro" class="smoothScroll">Instructions</a></li>
-				<li><a href="#overview" class="smoothScroll">Submit</a></li>
-
-            </ul>
-		</div>
-
-	</div>
-</div>
-
-
-<!-- =========================
-    INSTRUCTIONS SECTION   
-============================== -->
-<section id="intro" class="parallax-section">
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-12 col-sm-12">
-				<h3 class="wow bounceIn" data-wow-delay="0.9s">Submit your Assignments below</h3>
-				<h1 class="wow fadeInUp" data-wow-delay="1.6s">ICS 2208 - OS II</h1>
-			</div>
-
-
-		</div>
-	</div>
-</section>
-
-
-<!-- =========================
-    SUBMISSION SECTION   
-============================== -->
-<section id="overview" class="parallax-section">
-	<div class="container">
-		<div class="row">
-            <form action="upload.php" method="post" enctype="multipart/form-data" accept=".doc, .docx">
-                <h2>Instructions</h2>
-                <p>
-                    <ol>
-                        <li>Save your document with your registration number eg. <i>CO26-01-0000_2016</i></li>
-                        <li>Click on the button below and select your file</li>
-                        <li>Click on upload</li>
-                    </ol>
-                    <i>If you have problems uploading your file, contact the class rep</i>
-                </p>
-                <p>
-                    <b>Select file to upload </b>
-                </p> 
-                <div class="">
-                    <p><input type="file" name="fileToUpload" id="uploadFile" class="btn btn-lg btn-default smoothScroll" /></p>
-               
-                    <p><input type="submit" class="btn btn-lg btn-success smoothScroll wow fadeInUp" value="Submit" /></p>
-                </div>
-            </form>
-		</div>
-	</div>
-</section>
-
-
-<!-- =========================
-    FOOTER SECTION   
-============================== -->
-<footer>
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-12 col-sm-12">
-				<p class="wow fadeInUp" data-wow-delay="0.6s"></a>Get this project on GitHub</p>
-
-				<ul class="social-icon" style="font-size: 30px;">
-					<li><a href="https://github.com/brianokinyi/OS2Assignment" class="fa fa-github wow fadeInUp " data-wow-delay="1s"></a></li>
-
-			</div>
-			
-		</div>
-	</div>
-</footer>
-
-
-<!-- Back top -->
-<a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
-
-
-<!-- =========================
-     SCRIPTS   
-============================== -->
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.parallax.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/smoothscroll.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/custom.js"></script>
 
 </body>
 </html>
